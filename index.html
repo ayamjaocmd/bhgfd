@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KAYLA IMAGE PRO</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">K</div><div><b>KAYLA</b><span>IMAGE PRO</span></div></div>
+    <nav>
+      <button class="nav active" data-page="dashboard">⌂ <span>Dashboard</span></button>
+      <button class="nav" data-page="create">✦ <span>Buat Iklan Baru</span></button>
+      <button class="nav" data-page="scenes">▦ <span>Studio Enam Scene</span></button>
+      <button class="nav" data-page="voice">◉ <span>Voice-Over</span></button>
+      <button class="nav" data-page="library">▣ <span>Proyek Saya</span></button>
+      <button class="nav" data-page="settings">⚙ <span>Pengaturan</span></button>
+    </nav>
+    <div class="sim">SIMULATION MODE<br><small>Provider AI belum dikonfigurasi</small></div>
+  </aside>
+
+  <main class="main">
+    <header>
+      <div>
+        <div class="eyebrow">AI PRODUCT ADVERTISING STUDIO</div>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <button class="primary" data-page="create">+ Buat Iklan</button>
+    </header>
+
+    <section id="dashboard" class="page active">
+      <div class="hero">
+        <div><span class="pill">WORKSPACE SIAP</span><h2>Ubah produk menjadi materi iklan yang siap dipublikasikan.</h2><p>Upload produk + referensi model/background, susun prompt, lalu siapkan enam scene dan voice-over Bahasa Indonesia.</p><button class="primary" data-page="create">Mulai Proyek Baru →</button></div>
+        <div class="hero-card"><div class="mini-label">PROYEK AKTIF</div><strong id="dashProject">Belum ada proyek</strong><div class="progress"><i id="dashProgress"></i></div><small id="dashStatus">0 / 6 scene siap</small></div>
+      </div>
+      <div class="stats"><div><span>Proyek</span><b id="statProjects">0</b></div><div><span>Scene dibuat</span><b id="statScenes">0</b></div><div><span>Audio</span><b id="statAudio">0</b></div><div><span>Status</span><b>SIMULATION</b></div></div>
+      <div class="section-head"><h3>Alur KAYLA</h3></div>
+      <div class="steps"><div><b>01</b><strong>Referensi</strong><span>Upload produk dan model/background.</span></div><div><b>02</b><strong>Prompt Studio</strong><span>Atur tema, komposisi, rasio, dan realisme.</span></div><div><b>03</b><strong>Enam Scene</strong><span>Siapkan storyboard visual yang konsisten.</span></div><div><b>04</b><strong>Voice-Over</strong><span>Buat naskah dan audio Bahasa Indonesia.</span></div></div>
+    </section>
+
+    <section id="create" class="page">
+      <div class="grid2">
+        <div class="card"><div class="card-title"><h3>1. Referensi Produk</h3><span>Wajib</span></div><label class="drop"><input id="productInput" type="file" accept="image/*"><span>＋<br><b>Upload gambar produk</b><small>JPG, PNG, WebP</small></span></label><img id="productPreview" class="preview hidden"></div>
+        <div class="card"><div class="card-title"><h3>2. Model / Background</h3><span>Wajib</span></div><label class="drop"><input id="modelInput" type="file" accept="image/*"><span>＋<br><b>Upload model / background</b><small>JPG, PNG, WebP</small></span></label><img id="modelPreview" class="preview hidden"></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><h3>Prompt Studio</h3><button class="ghost" id="autoPrompt">✦ Buat Prompt Otomatis</button></div>
+        <div class="formgrid">
+          <label>Nama produk<input id="productName" placeholder="Contoh: Serum Glow"></label>
+          <label>Tema / suasana<input id="theme" placeholder="Premium, clean, modern"></label>
+          <label>Gaya iklan<select id="adStyle"><option>Elegan / Premium</option><option>Profesional</option><option>Persuasif</option><option>Ramah</option><option>Energik</option><option>Affiliate</option></select></label>
+          <label>Rasio<select id="ratio"><option>9:16</option><option>1:1</option><option>4:5</option><option>16:9</option><option>3:4</option><option>4:3</option><option>21:9</option><option>Custom</option></select></label>
+          <label>Komposisi<select id="composition"><option>Produk saja</option><option>Dipegang tangan</option><option>Dipegang model</option><option>Di atas meja</option><option>Dipegang dan di atas meja</option></select></label>
+          <label>Tingkat realisme<select id="realism"><option>Fotorealistik</option><option>Sangat realistis</option><option>Editorial</option></select></label>
+        </div>
+        <label>Prompt utama<textarea id="prompt" rows="5" placeholder="Prompt iklan produk..."></textarea></label>
+        <label>Detail wajib dipertahankan<textarea id="mustKeep" rows="3">Pertahankan bentuk, warna, label, logo, kemasan, proporsi, dan detail asli produk. Jangan menambah produk yang tidak diminta.</textarea></label>
+        <div class="actions"><button class="primary" id="createProject">Simpan & Buka Studio →</button></div>
+      </div>
+    </section>
+
+    <section id="scenes" class="page">
+      <div class="toolbar"><div><div class="eyebrow">STUDIO</div><h2>Enam Scene</h2><p class="muted">Setiap scene dapat diproses secara independen.</p></div><button class="primary" id="generateAll">Generate Semua (Simulation)</button></div>
+      <div id="sceneGrid" class="scene-grid"></div>
+    </section>
+
+    <section id="voice" class="page">
+      <div class="grid2">
+        <div class="card"><div class="card-title"><h3>Naskah Iklan</h3><span>Bahasa Indonesia</span></div>
+          <div class="formgrid"><label>Nama produk<input id="vName"></label><label>Target audiens<input id="vTarget" placeholder="Contoh: wanita aktif 20–35"></label><label>Gaya<select id="vStyle"><option>Elegan / Premium</option><option>Persuasif</option><option>Ramah</option><option>Energik</option><option>Soft selling</option><option>Affiliate</option></select></label><label>Durasi<select id="duration"><option>15 detik</option><option>20 detik</option><option>25 detik</option><option>30 detik</option><option>35 detik</option></select></label></div>
+          <label>Script<textarea id="script" rows="9" placeholder="Klik Buat Naskah untuk menghasilkan draft."></textarea></label>
+          <button class="ghost" id="makeScript">✦ Buat Naskah</button>
+        </div>
+        <div class="card"><div class="card-title"><h3>Voice Catalog</h3><span>SIMULATION</span></div>
+          <div class="voice-option selected"><div class="avatar">A</div><div><b>Ayu — id-ID</b><small>Natural · Female · Premium</small></div><button class="ghost play">▶</button></div>
+          <div class="voice-option"><div class="avatar">D</div><div><b>Dimas — id-ID</b><small>Warm · Male · Persuasive</small></div><button class="ghost play">▶</button></div>
+          <div class="voice-option"><div class="avatar">S</div><div><b>Sari — id-ID</b><small>Energetic · Female</small></div><button class="ghost play">▶</button></div>
+          <div class="audio-box"><div class="wave">▁▂▃▅▇▆▃▂▁▃▅▇▅▃▂▁</div><span id="audioStatus">Belum ada audio</span><button class="primary" id="generateAudio">Generate Voice-Over</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="library" class="page"><div class="toolbar"><div><div class="eyebrow">CLOUD LIBRARY</div><h2>Proyek Saya</h2></div><button class="primary" data-page="create">+ Proyek Baru</button></div><div id="libraryList" class="library"></div></section>
+
+    <section id="settings" class="page"><div class="card settings"><h3>Pengaturan</h3><div class="notice"><b>SIMULATION MODE</b><br>Antarmuka web sudah aktif, tetapi blueprint KAYLA belum memiliki kredensial provider image/LLM/TTS, database production, object storage, atau auth provider. Generation nyata harus dikonfigurasi di backend sebelum diberi status berhasil.</div><h4>Provider yang perlu dikonfigurasi</h4><ul><li>Image generation + reference image</li><li>LLM untuk prompt/script/recommendation</li><li>TTS Bahasa Indonesia</li><li>PostgreSQL + object storage</li><li>Authentication + queue/Redis</li></ul></div></section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
